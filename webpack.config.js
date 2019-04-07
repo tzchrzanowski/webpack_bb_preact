@@ -1,33 +1,41 @@
 const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  // transform:
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+
+module.exports = ({ mode, presets } = { mode: "production", presets: [] }) => {
+    return {
+      mode,
+      entry: './src/index.js',
+      output: {
+        path: path.resolve(__dirname, 'dist')
       },
-      {
-        test: /\.jsx$/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env'],
-          plugins: [
-            ['@babel/plugin-transform-react-jsx', { pragma: 'h' }]
-          ]
-        }
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            loader: 'babel-loader',
+            exclude: /node_modules/
+          },
+          {
+            test: /\.jsx$/,
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: [
+                ['@babel/plugin-transform-react-jsx', { pragma: 'h' }]
+              ]
+            }
+          },
+          {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+          }
+        ]
       },
-      {
-        test: /\.css$/,
-        use: [{loader: 'style-loader'}, {loader: 'css-loader'}]
-      }
-    ]
-  }
+      plugins: [
+        new HtmlWebpackPlugin(),
+        new webpack.ProgressPlugin()
+      ]
+    };
 };

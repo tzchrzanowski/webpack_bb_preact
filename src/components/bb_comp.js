@@ -1,6 +1,6 @@
-import _ from '../../node_modules/underscore/underscore-min.js'
-import $ from '../../node_modules/jquery/dist/jquery.min.js'
-import Backbone from '../../node_modules/backbone/backbone-min.js';
+import _ from 'underscore'
+import $ from 'jquery'
+import Backbone from 'backbone';
 
 $( document ).ready(function () {
   let Rectangle = Backbone.Model.extend({});
@@ -48,8 +48,8 @@ $( document ).ready(function () {
           width: 100,
           height: 60,
           position: {
-              x: 50,
-              y: 50
+              x: 120,
+              y: 150
           },
           color: '#FF0000',
       }),
