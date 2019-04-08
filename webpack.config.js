@@ -15,7 +15,12 @@ module.exports = ({ mode, presets } = { mode: "production", presets: [] }) => {
           {
             test: /\.js$/,
             loader: 'babel-loader',
-            exclude: /node_modules/
+            options: {
+              "babelrc": false,
+              "plugins": [
+                  "dynamic-import-webpack",
+              ]
+            }
           },
           {
             test: /\.jsx$/,
